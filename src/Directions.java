@@ -1,5 +1,5 @@
 
-public enum Direction {
+public enum Directions {
 	NORTH, EAST, SOUTH, WEST;
 	
 	private int count = 0;

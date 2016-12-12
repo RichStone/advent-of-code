@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 
+import apple.laf.JRSUIConstants.Direction;
+
 public class Coordinator {
-	private Direction actualDirection = Direction.NORTH;
-	private ArrayList<String> instructions;
+	private static Directions actualDirection = Directions.NORTH;
+	private static ArrayList<String> instructions;
 	
-	public void setDirection(String turningDirection) {
+	public static void setDirection(String turningDirection) {
+		System.out.println(turningDirection);
 		System.out.println(actualDirection);
 		int directionIndex;
 		if(turningDirection.equals("R")) {
@@ -23,21 +26,28 @@ public class Coordinator {
 			newDirection = 0;
 		}
 		
-		actualDirection = Direction.values()[newDirection];
+		actualDirection = Directions.values()[newDirection];
 		System.out.println(" after change " + actualDirection);
 	}
 	
-	public void walk(int steps) {
+	public static void walk(int steps) {
+		System.out.println(steps);
 		actualDirection.addSteps(steps);
 	}
 	
-	public Coordinator(ArrayList<String> instructions) {
-		this.instructions = instructions;
-	}
-	
-	public int calculateWay() {
+	public static int calculateWay(ArrayList<String> newInstructions) {
+		instructions = newInstructions;
 		int blocksAway = 0;
 		
+		for(String instruction : instructions) {
+			setDirection(instruction.substring(0, 1));
+			walk(Integer.parseInt(instruction.substring((Integer)(1))));
+		}
+		
+		System.out.println("North: " + Directions.NORTH.getCount() + " East: " + Directions.EAST.getCount());
+		
+		blocksAway = (Math.abs(Directions.NORTH.getCount() - Directions.SOUTH.getCount()) + Math.abs(Directions.WEST.getCount() - Directions.EAST.getCount()));
+		System.out.println(blocksAway);
 		return blocksAway; 
 	}
 }
