@@ -1,7 +1,11 @@
+package advent_door_01;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Coordinator_01 {
+import goods.LocalFileReader;
+
+public class Coordinator {
 	private static Directions actualDirection = Directions.NORTH;
 	private static ArrayList<String> instructions;
 	
