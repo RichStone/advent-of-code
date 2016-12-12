@@ -1,6 +1,8 @@
+import java.util.ArrayList;
 
 public class Coordinator {
 	private Direction actualDirection = Direction.NORTH;
+	private ArrayList<String> instructions;
 	
 	public void setDirection(String turningDirection) {
 		System.out.println(actualDirection);
@@ -27,5 +29,15 @@ public class Coordinator {
 	
 	public void walk(int steps) {
 		actualDirection.addSteps(steps);
+	}
+	
+	public Coordinator(ArrayList<String> instructions) {
+		this.instructions = instructions;
+	}
+	
+	public int calculateWay() {
+		int blocksAway = 0;
+		
+		return blocksAway; 
 	}
 }
