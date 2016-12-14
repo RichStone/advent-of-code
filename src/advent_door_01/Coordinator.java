@@ -3,6 +3,7 @@ package advent_door_01;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import goods.Directions;
 import goods.LocalFileReader;
 
 public class Coordinator {

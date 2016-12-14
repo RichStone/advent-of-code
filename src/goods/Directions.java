@@ -1,4 +1,4 @@
-package advent_door_01;
+package goods;
 
 public enum Directions {
 	NORTH, EAST, SOUTH, WEST;
