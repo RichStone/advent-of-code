@@ -8,6 +8,7 @@ public class NumPad
 {
 	Button currBtn;
 	ArrayList<String> instructions;
+	ArrayList<Button> code = new ArrayList();
 
 	Button one = new Button("one");
 	Button two = new Button("two");
@@ -19,23 +20,60 @@ public class NumPad
 	Button eight = new Button("eight");
 	Button nine = new Button("nine");
 
-	public NumPad() {
+	public NumPad() 
+	{
 		connectButtons();
+		
+		//get the instructions
 		try {
-			LocalFileReader lfr = new LocalFileReader("codeTaps.txt", "");
+			LocalFileReader lfr = new LocalFileReader("codeTaps.txt", "\n");
 			instructions = lfr.getTokens();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(instructions.get(0));
+		calculateCode();
+		printCode();
 	}
 	
-	public static void calculateCode() 
+	public void calculateCode() 
 	{
-		
+		for(String sequence : instructions) {
+			for(int i = 0; i < sequence.length(); i++) {
+				if(sequence.substring(i, i+1).equals("L")) {
+					if(currBtn.west != null) {
+						currBtn = currBtn.west;
+					}
+				} 
+				else if(sequence.substring(i, i+1).equals("R")) {
+					if(currBtn.east != null) {
+						currBtn = currBtn.east;
+					}
+				}
+				else if(sequence.substring(i, i+1).equals("D")) {
+					if(currBtn.south != null) {
+						currBtn = currBtn.south;
+					}		
+				}	
+				else if(sequence.substring(i, i+1).equals("U")) {
+					if(currBtn.north != null) {
+						currBtn = currBtn.north;
+					}
+				}
+				if(i == sequence.length() - 1) {
+					code.add(currBtn);
+				}
+			}
+		}
 	}
 	
-	public void connectButtons() {
+	public void printCode() {
+		for(Button btn : code) {
+			System.out.print(btn.toString() + " - ");
+		}
+	}
+	
+	public void connectButtons() 
+	{
 		one.east = two;
 		one.south = four;
 		
@@ -55,7 +93,7 @@ public class NumPad
 		five.west = four;
 		five.south = eight;
 		
-		six.east = five;
+		six.west = five;
 		six.north = three;
 		six.south = nine;
 		
@@ -73,7 +111,8 @@ public class NumPad
 	}
 	
 	//* test connections */
-	public void printAllButtonConnections() {
+	public void printAllButtonConnections() 
+	{
 		System.out.println(one.printDirections());
 		System.out.println(two.printDirections());
 		System.out.println(three.printDirections());
