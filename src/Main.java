@@ -1,10 +1,8 @@
-import java.util.Random;
-
-import advent_door_02.NumPadGraph;
+import advent_door_02.NumPad;
 
 public class Main 
 {
 	public static void main (String [] args) throws Exception {
-		NumPadGraph.start();
+		NumPad np = new NumPad();
 	}
 }
