@@ -1,13 +1,11 @@
-import com.sun.prism.paint.Stop;
-
-import advent_door_02.NumPad;
 import goods.Stopwatch;
+import advent_door_04.SecuritySequence;
 
 public class Main 
 {
 	public static void main (String [] args) throws Exception {
 		Stopwatch.start();
-		NumPad np = new NumPad();
+		SecuritySequence sc = new SecuritySequence();
 		Stopwatch.stop();
 	}
 }
